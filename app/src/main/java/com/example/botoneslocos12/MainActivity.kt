@@ -2,6 +2,7 @@ package com.example.botoneslocos12
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var tvTiempoRestante:TextView
     lateinit var tvJugadaTotales:TextView
+    lateinit var tvMaxJugada:TextView
+    lateinit var etNombre:EditText
+
     lateinit var btn01:Button
     lateinit var btn02:Button
     lateinit var btn03:Button
@@ -25,11 +29,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var btn11:Button
     lateinit var btn12:Button
 
+
     lateinit var btnJugar:Button
     lateinit var btnReset:Button
 
+    var nombre:String = ""
     var tiempo:Int = 0
     var contador:Int = 0
+    var max:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +56,13 @@ class MainActivity : AppCompatActivity() {
     private fun initComponent(){
         tvTiempoRestante = findViewById(R.id.tvTiempoRestante)
         tvJugadaTotales = findViewById(R.id.tvJugadaTotales)
+        tvMaxJugada = findViewById(R.id.tvMaxJugada)
+
+        etNombre = findViewById(R.id.etNombre)
 
         btnJugar = findViewById(R.id.btnJugar)
         btnReset = findViewById(R.id.btnReset)
+
 
         btn01 = findViewById(R.id.btn01)
         btn02 = findViewById(R.id.btn02)
@@ -78,8 +89,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun inicio(){
+        guardarContadorJugada()
         tiempo = 10
-        contador = 0
         reiniciarContador()
         apagarBotones()
         btnJugar.isEnabled = true
@@ -198,9 +209,29 @@ class MainActivity : AppCompatActivity() {
         tvJugadaTotales.text = texto+contador.toString()
     }
     private fun reiniciarContador(){
+
+        contador = 0
         var texto:String = "jugadas totales: "
         tvJugadaTotales.text = texto+contador.toString()
     }
+
+    private fun guardarContadorJugada() {
+        var texto:String = "Record : DESCONOCIDO: "
+        if(etNombre.text.isEmpty()){
+            if(contador > max){
+                tvMaxJugada.text =(texto+contador)
+                max = contador
+            }
+        }else{
+            texto = ("Record:  "+etNombre.text.toString()+": ")
+            if(contador > max){
+                tvMaxJugada.text =(texto+contador)
+                max = contador
+            }
+        }
+
+    }
+
     private fun apagarBotones(){
         btn01.isEnabled = false
         btn02.isEnabled = false
@@ -254,6 +285,7 @@ class MainActivity : AppCompatActivity() {
         tvTiempoRestante.text = text + tiempo.toString()
         if(tiempo == 0){
             apagarBotones()
+            guardarContadorJugada()
         }
     }
 }

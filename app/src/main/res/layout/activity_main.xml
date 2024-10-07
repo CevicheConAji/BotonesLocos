@@ -203,5 +203,19 @@
         android:layout_below="@+id/btn10"
         android:layout_marginTop="20dp"
         android:text="reset" />
+    <TextView
+        android:id="@+id/tvMaxJugada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnReset"
+        android:gravity="center"
+        android:text="" />
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMaxJugada"
+        android:gravity="center"
+        android:text="" />
 
 </RelativeLayout>
