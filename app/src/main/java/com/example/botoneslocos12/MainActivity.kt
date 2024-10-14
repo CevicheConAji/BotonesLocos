@@ -8,12 +8,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Queue
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var tvTiempoRestante:TextView
     lateinit var tvJugadaTotales:TextView
     lateinit var tvMaxJugada:TextView
+    lateinit var tvRegistro:TextView
     lateinit var etNombre:EditText
 
     lateinit var btn01:Button
@@ -33,10 +35,18 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnJugar:Button
     lateinit var btnReset:Button
 
-    var nombre:String = ""
     var tiempo:Int = 0
     var contador:Int = 0
     var max:Int = 0
+
+    var registro:String = " "
+    var registro1:String = " "
+    var registro2:String = " "
+    var registro3:String = " "
+    var registro4:String = " "
+    var registro5:String = " "
+    var ultimaJugada:String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         tvTiempoRestante = findViewById(R.id.tvTiempoRestante)
         tvJugadaTotales = findViewById(R.id.tvJugadaTotales)
         tvMaxJugada = findViewById(R.id.tvMaxJugada)
+        tvRegistro = findViewById(R.id.tvRegistros)
 
         etNombre = findViewById(R.id.etNombre)
 
@@ -85,8 +96,70 @@ class MainActivity : AppCompatActivity() {
         }
         btnReset.setOnClickListener(){
             inicio()
-
         }
+        //dentro del juego
+        btn01.setOnClickListener(){
+            btn01.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn02.setOnClickListener(){
+            btn02.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn03.setOnClickListener(){
+            btn03.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn04.setOnClickListener(){
+            btn04.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn05.setOnClickListener(){
+            btn05.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn06.setOnClickListener(){
+            btn06.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn07.setOnClickListener(){
+            btn07.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn08.setOnClickListener(){
+            btn08.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn09.setOnClickListener(){
+            btn09.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn10.setOnClickListener(){
+            btn10.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn11.setOnClickListener(){
+            btn11.isEnabled = false
+            contador()
+            randomBotones()
+        }
+        btn12.setOnClickListener(){
+            btn12.isEnabled = false
+            contador()
+            randomBotones()
+        }
+
+
     }
     private fun inicio(){
         guardarContadorJugada()
@@ -94,6 +167,7 @@ class MainActivity : AppCompatActivity() {
         reiniciarContador()
         apagarBotones()
         btnJugar.isEnabled = true
+        btnReset.isEnabled = false
     }
 
     private fun jugar(){
@@ -106,100 +180,39 @@ class MainActivity : AppCompatActivity() {
         var nAleatorio:Int = (1..12).random();
         if(nAleatorio == 1){
             btn01.isEnabled = true
-            btn01.setOnClickListener(){
-                btn01.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio==2){
             btn02.isEnabled = true
-            btn02.setOnClickListener(){
-                btn02.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 3){
             btn03.isEnabled = true
-            btn03.setOnClickListener(){
-                btn03.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 4){
             btn04.isEnabled = true
-            btn04.setOnClickListener(){
-                btn04.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio== 5){
             btn05.isEnabled = true
-            btn05.setOnClickListener(){
-                btn05.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 6){
             btn06.isEnabled = true
-            btn06.setOnClickListener(){
-                btn06.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
-
         if(nAleatorio == 7){
             btn07.isEnabled = true
-            btn07.setOnClickListener(){
-                btn07.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio== 8){
             btn08.isEnabled = true
-            btn08.setOnClickListener(){
-                btn08.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 9){
             btn09.isEnabled = true
-            btn09.setOnClickListener(){
-                btn09.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 10){
             btn10.isEnabled = true
-            btn10.setOnClickListener(){
-                btn10.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio== 11){
             btn11.isEnabled = true
-            btn11.setOnClickListener(){
-                btn11.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
         if(nAleatorio == 12){
             btn12.isEnabled = true
-            btn12.setOnClickListener(){
-                btn12.isEnabled = false
-                contador()
-                randomBotones()
-            }
         }
 
     }
@@ -215,21 +228,44 @@ class MainActivity : AppCompatActivity() {
         tvJugadaTotales.text = texto+contador.toString()
     }
 
+    /**
+     *
+     */
     private fun guardarContadorJugada() {
         var texto:String = "Record : DESCONOCIDO: "
         if(etNombre.text.isEmpty()){
             if(contador > max){
                 tvMaxJugada.text =(texto+contador)
                 max = contador
+
             }
         }else{
             texto = ("Record:  "+etNombre.text.toString()+": ")
             if(contador > max){
                 tvMaxJugada.text =(texto+contador)
                 max = contador
+
             }
         }
 
+
+    }
+    private fun registro(){
+        if (etNombre.text.isEmpty()){
+            registro = ("DESCONOCIDO: "+contador+" Clicks")
+        }
+        else{
+            registro = (etNombre.text.toString()+" "+contador+" Clicks")
+        }
+
+        registro5 = registro4
+        registro4 = registro3
+        registro3 = registro2
+        registro2 = registro1
+        registro1 = registro
+
+        ultimaJugada = "\n"+registro1 +"\n"+ registro2 +"\n" +registro3 +"\n"+registro4 +"\n"+ registro5
+        tvRegistro.text = "ULTIMAS JUGADAS" + ultimaJugada
     }
 
     private fun apagarBotones(){
@@ -248,6 +284,9 @@ class MainActivity : AppCompatActivity() {
     }
     private fun cuentaAtras(){
         //LLama a la variable cada x milisSegundos
+        if(tiempo == 0){
+            return
+        }
         var postDelayed01 = android.os.Handler().postDelayed({
             cuentaAtrasTexto()
         }, 1000)
@@ -286,6 +325,8 @@ class MainActivity : AppCompatActivity() {
         if(tiempo == 0){
             apagarBotones()
             guardarContadorJugada()
+            btnReset.isEnabled = true
+            registro()
         }
     }
 }
