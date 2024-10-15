@@ -6,5 +6,5 @@
         android:endColor="#0077FF"
         android:angle="270" />
     <corners android:radius="10dp" />
-    <stroke android:width="10px" android:color="@color/black" />
+    <!--<stroke android:width="10px" android:color="@color/black" />-->
 </shape>
